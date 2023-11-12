@@ -21,6 +21,10 @@ func (d Dense) at(row, col int) float64 {
 	return d.data[row][col]
 }
 
+func Mat(mat [][]float64) Matrix {
+	return Dense{data: mat}
+}
+
 func Empty() Matrix {
 	return Dense{}
 }
@@ -33,23 +37,9 @@ func Rand(rows, cols int) Matrix {
 			data[row][col] = rand.Float64()
 		}
 	}
-	return Dense{data}
-}
-
-func RowVec(vec ...float64) Matrix {
-	if len(vec) > 0 {
-		return Dense{data: [][]float64{vec}}
-	}
-	return nil
-}
-
-func ColVec(vec ...float64) Matrix {
-	if len(vec) > 0 {
-		return Transpose(Dense{data: [][]float64{vec}})
-	}
-	return nil
+	return Mat(data)
 }
 
 func Scalar(scalar float64) Matrix {
-	return Dense{data: [][]float64{{scalar}}}
+	return Mat([][]float64{{scalar}})
 }

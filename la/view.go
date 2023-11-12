@@ -14,5 +14,5 @@ func (v View) at(row int, col int) float64 {
 }
 
 func (v View) store() Matrix {
-	return Dense{data: Data(v)}
+	return Mat(Data(v))
 }

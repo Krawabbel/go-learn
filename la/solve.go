@@ -3,24 +3,25 @@ package la
 import "fmt"
 
 const (
-	CHOLESKY = iota
-	LEAST_SQUARES
-	LOWER
-	UPPER
+	CHOLESKY_SOLVER = iota
+	LEAST_SQUARES_SOLVER
+	LOWER_SOLVER
+	UPPER_SOLVER
 )
 
+// Solve A*X = Y for X with various solvers
 func Solve(A, Y Matrix, solver int) (X Matrix, err error) {
 	switch solver {
-	case CHOLESKY:
+	case CHOLESKY_SOLVER:
 		X, err = chol_solve(A, Y)
-	case LEAST_SQUARES:
+	case LEAST_SQUARES_SOLVER:
 		X, err = ls_solve(A, Y)
-	case LOWER:
+	case LOWER_SOLVER:
 		X, err = lower_solve(A, Y)
-	case UPPER:
+	case UPPER_SOLVER:
 		X, err = upper_solve(A, Y)
 	default:
-		return nil, fmt.Errorf("unknown solver")
+		return nil, fmt.Errorf("unknown solver type")
 	}
 	return
 }
@@ -74,7 +75,7 @@ func lower_solve(L, Y Matrix) (Matrix, error) {
 
 		}
 	}
-	return Dense{data: x}, nil
+	return Mat(x), nil
 }
 
 func upper_solve(U, Y Matrix) (Matrix, error) {
@@ -110,7 +111,5 @@ func upper_solve(U, Y Matrix) (Matrix, error) {
 			x[row][col] = (Y.at(row, col) - sum) / U.at(row, row)
 		}
 	}
-
-	return Dense{data: x}, nil
-
+	return Mat(x), nil
 }

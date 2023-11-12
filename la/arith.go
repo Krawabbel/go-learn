@@ -38,3 +38,16 @@ func Add(M, N Matrix) (Matrix, error) {
 
 	return View{M.rows(), N.cols(), at}.store(), nil
 }
+
+func Scale(c float64, M Matrix) (Matrix, error) {
+
+	if M == nil {
+		return nil, fmt.Errorf("cannot scale nil matrix")
+	}
+
+	at := func(row, col int) float64 {
+		return c * M.at(row, col)
+	}
+
+	return View{M.rows(), M.cols(), at}.store(), nil
+}
