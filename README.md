@@ -1,5 +1,5 @@
 # go-learn
-a statistics library written in Go (Golang)
+a machine learning library written in Go (Golang)
 
 [![Go](https://github.com/Krawabbel/go-learn/actions/workflows/go.yml/badge.svg)](https://github.com/Krawabbel/go-learn/actions/workflows/go.yml)
 
