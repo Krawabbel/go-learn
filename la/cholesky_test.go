@@ -36,7 +36,7 @@ func Test_chol_dec(t *testing.T) {
 			EXPECT_EQ(t, have, tt.want, FLOAT_EQ_TOL)
 
 			if err == nil {
-				reverse, err := Mult(have, Transpose(have))
+				reverse, err := Mult(have, Transp(have))
 				if err != nil {
 					t.Error(err)
 				}
@@ -84,7 +84,7 @@ func TestChol_Solve_Rand(t *testing.T) {
 	for dim := 1; dim < 10; dim++ {
 		for num := 1; num < 3; num++ {
 			M := Rand(dim, dim)
-			N, err := Mult(Transpose(M), M)
+			N, err := Mult(Transp(M), M)
 			if err != nil {
 				t.Fatal(err)
 			}

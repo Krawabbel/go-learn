@@ -38,7 +38,7 @@ func Predict(x_train [][]float64, y_train []float64, x_pred [][]float64, kernel 
 
 	K_tp := cov(x_train, x_pred, kernel)
 
-	Y_pred, err = la.Mult(la.Transpose(K_tp), W)
+	Y_pred, err = la.Mult(la.Transp(K_tp), W)
 	if err != nil {
 		panic(err)
 	}

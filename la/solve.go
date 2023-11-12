@@ -28,7 +28,7 @@ func Solve(A, Y Matrix, solver int) (X Matrix, err error) {
 
 func ls_solve(A, Y Matrix) (Matrix, error) {
 
-	AT := Transpose(A)
+	AT := Transp(A)
 
 	PHI, err := Mult(AT, A)
 	if err != nil {

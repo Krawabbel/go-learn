@@ -86,7 +86,7 @@ func TestString(t *testing.T) {
 	}
 }
 
-func TestTranspose(t *testing.T) {
+func TestTransp(t *testing.T) {
 	type args struct {
 		M Matrix
 	}
@@ -104,7 +104,7 @@ func TestTranspose(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := Transpose(tt.args.M)
+			got := Transp(tt.args.M)
 			EXPECT_EQ(t, got, tt.want, FLOAT_EQ_TOL)
 		})
 	}

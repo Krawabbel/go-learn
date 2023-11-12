@@ -65,7 +65,7 @@ func chol_solve(A, Z Matrix) (Matrix, error) {
 		return nil, err
 	}
 
-	U := Transpose(L)
+	U := Transp(L)
 
 	X, err := upper_solve(U, Y)
 	if err != nil {

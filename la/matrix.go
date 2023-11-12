@@ -11,7 +11,7 @@ type Matrix interface {
 	at(row int, col int) float64
 }
 
-func Transpose(M Matrix) Matrix {
+func Transp(M Matrix) Matrix {
 	if M == nil {
 		return nil
 	}

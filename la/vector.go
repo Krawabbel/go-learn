@@ -9,7 +9,7 @@ func RowVec(vec ...float64) Matrix {
 
 func ColVec(vec ...float64) Matrix {
 	if len(vec) > 0 {
-		return Transpose(Mat([][]float64{vec}))
+		return Transp(Mat([][]float64{vec}))
 	}
 	return nil
 }
