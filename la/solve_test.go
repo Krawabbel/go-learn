@@ -1,8 +1,40 @@
-package matrix
+package la
 
 import (
 	"testing"
 )
+
+func Test_ls_solve(t *testing.T) {
+	type args struct {
+		A Matrix
+		Y Matrix
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    Matrix
+		wantErr bool
+	}{
+		{"nil nil", args{nil, nil}, nil, true},
+		{"nil empty", args{nil, Empty()}, nil, true},
+		{"empty nil", args{Empty(), nil}, nil, true},
+		{"empty empty", args{Empty(), Empty()}, Empty(), false},
+		{"scalar scalar", args{Scalar(-2), Scalar(4)}, Scalar(-2), false},
+		{"vec vec", args{ColVec(1, 1), ColVec(2, 3)}, Scalar(2.5), false},
+		{"linear", args{ColVec(1, 2, 3), ColVec(2, 4, 6)}, Scalar(2), false},
+		{"interpolate 1+2x+3x^2 at x=(0,1,2)", args{Dense{[][]float64{{1, 0, 0}, {1, 1, 1}, {1, 2, 4}}}, ColVec(1, 6, 17)}, ColVec(1, 2, 3), false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := ls_solve(tt.args.A, tt.args.Y)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ls_solve() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			EXPECT_EQ(t, got, tt.want, float_eq_tol)
+		})
+	}
+}
 
 func Test_lower_solve(t *testing.T) {
 	type args struct {

@@ -1,4 +1,4 @@
-package matrix
+package la
 
 type Diagonal struct {
 	diag []float64

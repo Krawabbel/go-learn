@@ -1,4 +1,4 @@
-package matrix
+package la
 
 type LazyView struct {
 	view  View

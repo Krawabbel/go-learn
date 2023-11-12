@@ -8,5 +8,4 @@ a machine learning library written in Go (Golang)
 ## Resources
 
 ### Gaussian Process Models
-
 * https://towardsdatascience.com/gaussian-process-models-7ebce1feb83d

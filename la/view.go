@@ -1,4 +1,4 @@
-package matrix
+package la
 
 type View struct {
 	nRows, nCols int

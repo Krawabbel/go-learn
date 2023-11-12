@@ -1,25 +1,46 @@
-package matrix
+package la
 
 import "fmt"
 
-func Lower(M Matrix) Matrix {
-	at := func(row, col int) float64 {
-		if col <= row {
-			return M.at(row, col)
-		}
-		return 0
+const (
+	CHOLESKY = iota
+	LEAST_SQUARES
+	LOWER
+	UPPER
+)
+
+func Solve(A, Y Matrix, solver int) (X Matrix, err error) {
+	switch solver {
+	case CHOLESKY:
+		X, err = chol_solve(A, Y)
+	case LEAST_SQUARES:
+		X, err = ls_solve(A, Y)
+	case LOWER:
+		X, err = lower_solve(A, Y)
+	case UPPER:
+		X, err = upper_solve(A, Y)
+	default:
+		return nil, fmt.Errorf("unknown solver")
 	}
-	return View{nRows: M.rows(), nCols: M.cols(), at_fun: at}
+	return
 }
 
-func Upper(M Matrix) Matrix {
-	at := func(row, col int) float64 {
-		if col >= row {
-			return M.at(row, col)
-		}
-		return 0
+func ls_solve(A, Y Matrix) (Matrix, error) {
+
+	AT := Transpose(A)
+
+	PHI, err := Mult(AT, A)
+	if err != nil {
+		return nil, err
 	}
-	return View{nRows: M.rows(), nCols: M.cols(), at_fun: at}
+
+	PSI, err := Mult(AT, Y)
+	if err != nil {
+		return nil, err
+	}
+
+	X, err := chol_solve(PHI, PSI)
+	return X, err
 }
 
 func lower_solve(L, Y Matrix) (Matrix, error) {

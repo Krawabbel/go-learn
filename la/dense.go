@@ -1,4 +1,4 @@
-package matrix
+package la
 
 import "math/rand"
 

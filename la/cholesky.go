@@ -1,4 +1,4 @@
-package matrix
+package la
 
 import (
 	"fmt"
@@ -69,7 +69,7 @@ func chol_solve(A, Z Matrix) (Matrix, error) {
 
 	X, err := upper_solve(U, Y)
 	if err != nil {
-		return nil, err
+		return nil, err // probably unreachable
 	}
 
 	return X, nil
